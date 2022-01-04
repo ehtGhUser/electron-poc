@@ -6,14 +6,33 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
+    "start:warnings": "electron --trace-warnings .",
     "build": "electron-builder build --win --publish never",
     "deploy": "electron-builder build --win --publish always"
+  },
+  "build": {
+    "artifactName": "electron-app-${version}.${ext}",
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080/"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "resources/windows/icon.ico"
+    },
+    "nsis": {
+      "perMachine": false
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ehtGhUser/electron-poc.git"
   },
-  "author": "",
+  "author": "Rudolf",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ehtGhUser/electron-poc/issues"
@@ -22,5 +41,11 @@
   "devDependencies": {
     "electron": "^16.0.5",
     "electron-builder": "^22.14.5"
+  },
+  "dependencies": {
+    "electron-builder-squirrel-windows": "^22.14.12",
+    "electron-log": "^4.4.4",
+    "electron-updater": "^4.3.9",
+    "http-server": "^14.0.0"
   }
 }
